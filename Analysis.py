@@ -4,7 +4,7 @@ from Stock import Stock
 
 od = ondemand.OnDemandClient(api_key='5dbee5d0272ae52936a8cabbdcef6ea6', end_point='https://marketdata.websol.barchart.com/')
 
-quotes = od.quote('AAPL,DDD,MMM,WBAI,WUBA,EGHT,AHC,ATEN,AAC,AIR,AAN,ABB,ABT,ABBV,ANF,GCH,ACP,JEQ,SGF,ABM,AKR,ACN,ACCO,ATV,ATU,AYI,GOLF,ADX,PEO', 'dividendRateAnnual')['results']
+quotes = od.quote('DDD,MMM,WBAI,WUBA,EGHT,AHC,ATEN,AAC,AIR,AAN,ABB,ABT,ABBV,ANF,GCH,ACP,JEQ,SGF,ABM,AKR,ACN,ACCO,ATV,ATU,AYI,GOLF,ADX,PEO,AGRO,ADNT,ATGE,AAP,ADSW,WMS,ASX,ASIX,AAV,AVK,AGC,LCM,ACM,ANW,AEB,AED,AEG,AEH,AEK,AER,HIVE,AJRD,AET,AMG,AFL,MITT,MITT^A,MITT^B,AGCO,A,AEM,ADC,AGU,AL,APD,AYR,AKS,ALP^Q,ALG,AGI,ALK,AIN,ALB,AA,ALEX,ALX,ARE,ARE^D,AQN,BABA,Y,ATI,ALLE,AGN,AGN^A,ALE,AKP,ADS,AFB,AOI,AWF,AB,LNT,CBH,NCV,NCZ,ACV,NIE,NFJ,ALSN,ALL,ALL^A,ALL^B,ALL^C,ALL^D,ALL^E,ALL^F,ALLY,ALLY^A,ALDW,AGD,AWP,AOD,AYX,ATUS,RESI,MO,ACH,AMBR,ABEV,AMC,AEE,AMRC,AMOV,AMX,AAT,AXL,ACC,AEO,AEP,AEL,AXP,AFG,AFGE,AFGH,AMH,AMH^C,AMH^D,AMH^E,AMH^F,AMH^G,AIG,AIG.WS,AMID,ARL,ARA,AWR', 'dividendRateAnnual')['results']
 
 
 resp = od.get('getQuote', symbols='AAPL,EXC', fields='bid,ask')
@@ -18,7 +18,7 @@ for q in quotes: 	#Creates a object and saves it in the list "stocks"
 	stocks.append(stockObj)
 
 
-print(stocks[0].dividendRateAnnual)
+#print(stocks[0].dividendRateAnnual)
 
 def findStockData(): #method for finding stockdata for the user 
 	nameSearch = input("What stock do you want to check out?")
@@ -34,12 +34,24 @@ for q in stocks:
 	text_file.write(q.name + ", ")
 text_file.close()
 
+dividendStocks = []
+noDividendStocks = []
+def findDividendStocks(): #functions from finding dividendStocks from iterating throug the Stocks list 
+	noDividendStock = "0"
+	for q in stocks:
+			if (q.dividendRateAnnual != "0"): 
+				if (q.dividendRateAnnual != None): 
+					dividendStocks.append(q)
+					#Checks if the returned variable is not 0 and not None then adds them to the list
+			else: 
+				noDividendStocks.append(q)
+				#adds a stock that does not pay dividend in a list.
 
+findDividendStocks()
+print (len(noDividendStocks))
 
-
-    
-
-
+print (len(dividendStocks))
+print (dividendStocks[1].name)
 #print(len(aksjenavn))
 #getStockNames()
 #print(len(aksjenavn))
