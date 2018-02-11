@@ -11,7 +11,7 @@ resp = od.get('getQuote', symbols='AAPL,EXC', fields='bid,ask')
 
 stocks = []
 industries = []
-
+industriTxt = open('Betas.txt','r')
 for q in quotes: 	#Creates a object and saves it in the list "stocks"
 	stockObj = Stock(q['symbol'], q['name'], q['dayCode'], q['serverTimestamp'], q['mode'], q['lastPrice'], q['tradeTimestamp'], q['netChange'], q['percentChange'], q['unitCode'], q['open'], q['high'], q['low'], q['close'], q['dividendRateAnnual'])
 	counter =+ 1
@@ -19,9 +19,11 @@ for q in quotes: 	#Creates a object and saves it in the list "stocks"
 
 #This reades the file to find the industry information
 
+#industryObj = Industry()
 
-
-
+for line in industriTxt:
+		for line in industriTxt:
+			print(line)
 
 def findStockData(): #method for finding stockdata for the user 
 	nameSearch = input("What stock do you want to check out?")
