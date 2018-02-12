@@ -20,7 +20,7 @@ for q in quotes: 	#Creates a object and saves it in the list "stocks"
 #This reades the file to find the industry information
 
 #industryObj = Industry()
-
+						#reads the industry information from industries.txt and creates and object for each industry and puts it in the list: industries[]
 for line in industriTxt:
 		for line in industriTxt:
 			currentline = line.split(",")
@@ -31,6 +31,8 @@ for line in industriTxt:
 			#industryObj = Industry(str(currentline[0]) + int(currentline[1])+float(currentline[2]))
 			
 print (len(industries))
+for q in industries: 
+	print (q.industryName)
 def findStockData(): #method for finding stockdata for the user 
 	nameSearch = input("What stock do you want to check out?")
 	print(nameSearch)
