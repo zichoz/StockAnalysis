@@ -23,8 +23,14 @@ for q in quotes: 	#Creates a object and saves it in the list "stocks"
 
 for line in industriTxt:
 		for line in industriTxt:
-			print(line)
-
+			currentline = line.split(",")
+			print(currentline[0] + "  "+currentline[2])
+			industryObj = Industry(currentline[0], currentline[1], currentline[2], currentline[3], currentline[4], currentline[5], currentline[6], currentline[7], currentline[8], currentline[9],  currentline[10])
+			print (industryObj.beta)
+			industries.append(industryObj)
+			#industryObj = Industry(str(currentline[0]) + int(currentline[1])+float(currentline[2]))
+			
+print (len(industries))
 def findStockData(): #method for finding stockdata for the user 
 	nameSearch = input("What stock do you want to check out?")
 	print(nameSearch)
