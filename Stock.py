@@ -17,4 +17,5 @@ class Stock:
 		self.low = low
 		self.close = close
 		self.dividendRateAnnual = dividendRateAnnual
+		#self.stockYield = stockYield
 		
