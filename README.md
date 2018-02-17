@@ -7,3 +7,8 @@ Future planned implemantations :
 3.
 4.
 5.
+
+
+Update 17.02.2018
+
+Started to rework the function for downloading stock data to prepare it to gather all stocks registered on the NYSE where i have created  file for all symbols
