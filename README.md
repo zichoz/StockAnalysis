@@ -8,6 +8,9 @@ Future planned implemantations :
 4.
 5.
 
+Update 19.02.2018
+Reworked the function so i can collect all NYSE stocks as efficientyl as possible
+
 
 Update 17.02.2018
 
