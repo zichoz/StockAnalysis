@@ -1,6 +1,8 @@
 import ondemand
 from Stock import Stock
 from Industry import Industry
+import datetime
+
 
 od = ondemand.OnDemandClient(api_key='5dbee5d0272ae52936a8cabbdcef6ea6', end_point='https://marketdata.websol.barchart.com/')
 #The stocks i use are just random picked from the stock exchange
@@ -120,10 +122,11 @@ def findDividendStocks(): #functions from finding dividendStocks from iterating 
 	for q in stocks:
 		if (q.dividendRateAnnual != "0"): 
 			if (q.dividendRateAnnual != None): 
+				print(q.dividendRateAnnual + "   " + q.name)
 				dividendStocks.append(q)
 
-				stockYield = float(q.dividendRateAnnual)/float(q.lastPrice)
-				print (q.name + "       " +  str(stockYield))
+				#stockYield = float(q.dividendRateAnnual)/float(q.lastPrice)
+				print (q.name + "       " +  q.dividendRateAnnual)
 					#print (str(q.name) + "     " + str(stockYield))
 					#Checks if the returned variable is not 0 and not None then adds them to the list
 		else: 
@@ -133,11 +136,35 @@ def findDividendStocks(): #functions from finding dividendStocks from iterating 
 #readTodaysStockDataFromNyse()
 
 
+def writeToFile():
+	t = (str(datetime.date.today())+".txt")
+	txtWithObjects = open(t, "w")
+
+	for q in stocks:
+		txtWithObjects.write(q.symbol + "," + q.name + ";" + str(q.dayCode) + "," + str(q.serverTimestamp) + "," + str(q.mode) + "," + str(q.tradeTimestamp) + "," + str(q.netChange) + "," + str(q.percentChange) + "," + str(q.unitCode) + "," + str(q.open) + "," + str(q.high) + "," + str(q.low) + "," + str(q.close) + "," + str(q.dividendRateAnnual) + "\n")
+	print (t)
+	menu()
+
+
+def loadFromFile():
+	date = input(" What date do you want to check out : Format:2018-02-19.txt ")
+	fil = open(date, "r")
+	
+	
+	for derp in fil:
+		currentLineReader = derp.split(",")
+		print (currentLineReader[0:10])
+
+
+
+
 def menu(): 	
 	print ("option 1 : load new stockData from NYSE")
 	print ("Option 2 : find information about one Stock")
 	print ("Option 3 : Find Dividendstocks")
-	print ("Option 4 : Quit")
+	print ("option 4 : Write new data to a new file")
+	print ("option 5: Load data from another date")
+	print ("Option 6 : Quit")
 
 	keyword = int(input("Type a number between 1 - 4 :      "))
 
@@ -149,7 +176,12 @@ def menu():
 		print ("test")
 		findDividendStocks()
 	elif (keyword == 4):
+		writeToFile()
+	elif (keyword == 5):
+		loadFromFile()
+	elif (keyword == 6):
 		print ("Quitting!")
+	
 	else: 
 		menu()
 
